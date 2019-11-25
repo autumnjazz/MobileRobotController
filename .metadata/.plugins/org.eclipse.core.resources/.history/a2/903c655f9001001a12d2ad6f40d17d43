@@ -1,0 +1,19 @@
+package sensorpackage;
+
+import basic.Point;
+
+public class PositionSensor extends Sensor{
+	
+	@Override
+	public Point location() {
+		
+		return null;
+	}
+
+	@Override
+	public boolean checksensor() {
+
+		return false;
+	}
+	
+}

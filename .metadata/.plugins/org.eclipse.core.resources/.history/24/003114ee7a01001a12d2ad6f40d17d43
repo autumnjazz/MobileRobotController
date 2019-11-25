@@ -1,0 +1,25 @@
+package pathpackage;
+
+import java.util.ArrayList;
+import basic.Point;
+
+public class Path {
+	public ArrayList<Point> pathlist = new ArrayList();
+	
+	public Point getPath(Point p) {
+		Point next;
+		for(Point obj:pathlist) {
+			if(obj == p) {
+				int idx = pathlist.indexOf(obj);
+				if(idx == pathlist.size()-1) return null;
+			}
+		}
+		return next;
+	}
+	
+	public void printPath() {
+		for(Point obj:pathlist) {
+			System.out.print(obj +" -> ");
+		}
+	}
+}

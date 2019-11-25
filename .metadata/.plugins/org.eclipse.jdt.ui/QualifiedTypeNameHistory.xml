@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="mappackage.Map"/>
+    <fullyQualifiedTypeName name="pathpackage.Path"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="robotpackage.Robot"/>
+    <fullyQualifiedTypeName name="java.awt.Point"/>
+    <fullyQualifiedTypeName name="spotpackage.Spot"/>
+    <fullyQualifiedTypeName name="mappackage.RealMap"/>
+    <fullyQualifiedTypeName name="repositorypackage.Repository"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="mappackage.DynamicMap"/>
+    <fullyQualifiedTypeName name="basic.Point"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,28 @@
+package sensorpackage;
+
+import basic.Point;
+import mappackage.RealMap;
+import repositorypackage.Repository;
+
+public class ColorBlobSensor extends Sensor{
+	Repository repo;
+	PositionSensor ps;
+	RealMap rm;
+	
+	public boolean[] detect() {
+		
+	}
+	
+	public Point location(char c) {
+		Point current = ps.location();
+		
+		current.changePoint(1, 0);
+		
+		return null;
+	}
+
+	public boolean checksensor(Point p) {
+		return false;
+	}
+
+}

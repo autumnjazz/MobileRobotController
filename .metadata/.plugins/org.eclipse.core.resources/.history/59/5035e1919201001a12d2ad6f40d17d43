@@ -1,0 +1,19 @@
+package sensorpackage;
+
+import basic.Point;
+
+public class HazardSensor extends Sensor{
+	PositionSensor ps;
+	
+	@Override
+	public Point location() {
+		Point current = ps.location();
+		return null;
+	}
+
+	@Override
+	public boolean checksensor() {
+		return false;
+	}
+
+}

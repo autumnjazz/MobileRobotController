@@ -1,0 +1,9 @@
+package pathpackage;
+
+import java.util.ArrayList;
+import basic.Point;
+
+public class Path {
+	public ArrayList<Point> path = new ArrayList();
+	
+}

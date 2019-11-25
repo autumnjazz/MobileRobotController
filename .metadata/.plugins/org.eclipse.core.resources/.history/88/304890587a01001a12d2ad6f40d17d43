@@ -1,0 +1,13 @@
+package pathpackage;
+
+import java.util.ArrayList;
+import basic.Point;
+
+public class Path {
+	public ArrayList<Point> pathlist = new ArrayList();
+	public void printPath() {
+		for(Point obj:pathlist) {
+			System.out.print(obj.getPosition());
+		}
+	}
+}

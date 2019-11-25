@@ -1,0 +1,10 @@
+package sensorpackage;
+
+import basic.Point;
+
+public abstract class Sensor {
+	
+	public abstract Point location(); 
+	
+	
+}

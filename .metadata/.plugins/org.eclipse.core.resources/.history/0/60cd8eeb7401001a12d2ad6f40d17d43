@@ -1,0 +1,15 @@
+package spotpackage;
+import basic.*;
+
+public class Spot {
+	Point p;
+	protected char character;
+	public Spot(){
+		character = '.';
+	}
+	public void setPosition(int x, int y) {
+		this.p.setPoint(x, y);
+	}
+	public Point getPosition() { return p;}
+	
+}

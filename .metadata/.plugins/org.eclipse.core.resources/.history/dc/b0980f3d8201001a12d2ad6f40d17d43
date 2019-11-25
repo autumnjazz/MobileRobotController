@@ -1,0 +1,6 @@
+package sensorpackage;
+
+public class Sensor {
+	Point p;
+	public void setPoint()
+}

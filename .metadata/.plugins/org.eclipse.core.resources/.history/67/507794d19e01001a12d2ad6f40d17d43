@@ -1,0 +1,39 @@
+package repositorypackage;
+import mappackage.*;
+import pathpackage.Path;
+
+public class Repository {
+	public Map m = new Map();
+	public Path p = new Path();
+	
+	public void setMap(Map m) {
+		this.m = m;
+	}
+	public void setPath(Path p) {
+		this.p = p;
+	}
+	public void setDynamicMap(DynamicMap dm) {
+		this.dm = dm;
+	}
+	
+	public void printMap() {
+		System.out.println("\nBoard:");
+		m.printBoard();
+//		System.out.println("\nHazard: ");
+//		m.printHazard();
+//		System.out.println("\nColorblob: ");
+//		m.printColorblob();
+	}
+	
+	public void printDMap() {
+		System.out.println("\nBoard:");
+		dm.printBoard();
+	}
+	
+	public void printPath() {
+		System.out.println("\nPath: ");
+		p.printPath();
+	}
+	
+	
+}

@@ -1,0 +1,17 @@
+
+public class Point {
+	private int x;
+	private int y;
+	Point(){
+		x = 0; y = 0;
+	}
+	public void setPoint(int x, int y) {
+		
+	}
+	public Point getPoint() {
+		Point p = Point();
+		
+		return p;
+	}
+	
+}

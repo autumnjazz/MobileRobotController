@@ -1,0 +1,9 @@
+package mappackage;
+
+public class DynamicMap {
+	Map m;
+	public DynamicMap(Map m) {
+		this.m = m;
+	}
+	
+}

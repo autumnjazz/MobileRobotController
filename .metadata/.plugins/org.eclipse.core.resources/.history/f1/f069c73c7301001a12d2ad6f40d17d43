@@ -1,0 +1,14 @@
+package spotpackage;
+
+public class Predefined {
+	private boolean visited;
+	Predefined(){
+		visited = false;
+	}
+	public void setVisited(boolean value) {
+		visited = value;
+	}
+	public boolean getVisited() {
+		return visited;
+	}
+}

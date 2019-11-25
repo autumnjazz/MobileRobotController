@@ -1,0 +1,9 @@
+package spotpackage;
+
+public class Hazard extends Spot{
+
+	public Hazard(int x, int y) {
+		character = 'H';
+		setPosition(x,y);
+	}
+}

@@ -1,0 +1,40 @@
+package pathpackage;
+
+import java.util.ArrayList;
+import basic.Point;
+import mappackage.Map;
+
+public class Path {
+	public ArrayList<Point> pathlist = new ArrayList();
+	
+	public void calculatePath(Map m) {
+		//Map 에 따른 경로 계산
+		for(int i =0; i< m.row; i++) {
+			for(int j = 0; j<m.col; i++) {
+				
+			}
+		}
+		
+	}
+	
+	public Point getPath(Point p) {
+		Point next = null;
+		for(Point obj:pathlist) {
+			if(obj == p) {
+				int idx = pathlist.indexOf(obj);
+				if(idx == pathlist.size()-1) return null; //no more path
+				next = pathlist.get(idx+1);
+			}
+		}
+		return next;
+	}
+	
+	public void printPath() {
+		for(Point obj:pathlist) {
+			System.out.print(obj +" -> ");
+		}
+	}
+	
+	
+	
+}

@@ -1,0 +1,18 @@
+package robotpackage;
+
+import basic.Point;
+
+public class Robot implements SIM{
+	Point current;
+	
+	public Point getCurrent() {
+		return current;
+	}
+	
+	public void setCurrent(int x, int y) {
+		current.setPoint(x, y);
+	}
+	
+	
+}
+

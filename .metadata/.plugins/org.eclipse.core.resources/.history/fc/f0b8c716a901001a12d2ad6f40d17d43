@@ -1,0 +1,109 @@
+package main;
+import java.util.Random;
+import java.util.Scanner;
+
+import basic.Point;
+import mappackage.*;
+import pathpackage.Path;
+import repositorypackage.Repository;
+import robotpackage.Robot;
+import spotpackage.*;
+
+public class OperateExploration {
+	
+	public Repository repo = new Repository();
+	RealMap rm;
+	public Robot robot = new Robot(repo);
+	
+	Scanner sc = new Scanner(System.in);
+	
+	public void inputmapinfo() {
+		
+		System.out.print("Map Size: ");
+        int a,b,c,d;
+        a = sc.nextInt();
+        b = sc.nextInt();
+        repo.m.initBoard(a, b);
+        
+        System.out.println("\nEnter -1 to quit");
+        do {
+	        System.out.print("Set Hazard: ");
+	        c = sc.nextInt();
+	        if(c==-1) break;
+	        if(c >= a) System.out.println("index out of bound");
+	        d = sc.nextInt();
+	        if(d==-1) break;
+	        if(d >= b) System.out.println("index out of bound");
+	        repo.m.setHazard(c, d);
+        }while(true);
+        
+        System.out.println("\nEnter -1 to quit");
+        do {
+	        System.out.print("Set Predefined: ");
+	        c = sc.nextInt();
+	        if(c==-1) break;
+	        if(c >= a) System.out.println("index out of bound");
+	        d = sc.nextInt();
+	        if(d==-1) break;
+	        if(d >= b) System.out.println("index out of bound");
+	        repo.m.setPredefined(c, d);
+        }while(true);
+        
+	}
+	
+	public void setreal() {
+        rm = new RealMap(repo.m); //실제 지도도 생성
+        robot.hs.setRM(rm);
+        robot.cs.setRM(rm);
+	}
+	
+	public void inputrobotinfo() {
+		System.out.print("\nStart coordinate: ");
+        int x,y;
+        x = sc.nextInt();
+        y = sc.nextInt();
+        robot.setCurrent(x, y);
+        Point p = new Point(x,y);
+        repo.setDM(p);
+        
+	}
+	
+	public void createpath() {
+		repo.p.calculatePath(repo.m);
+	}
+
+	
+	public void printall() {
+		repo.printMap();
+		repo.printDMap();
+		rm.printBoard();
+		repo.printPath();
+	}
+	
+	public void explore() {
+		robot.detectSpot();
+		robot.move();
+		if(robot.getCurrent() == null) System.out.println("finished exploring!");
+	}
+	
+	public static void main(String[] args) {
+		
+		OperateExploration oe = new OperateExploration();
+		
+		//준비
+		oe.inputmapinfo();
+		oe.inputrobotinfo();
+		oe.createpath();
+		oe.setreal();
+		oe.printall();
+		
+		//시작
+		while(true) {
+			oe.explore();
+			if(oe.robot.getCurrent() == null) break;
+		}
+		
+
+	}
+
+}

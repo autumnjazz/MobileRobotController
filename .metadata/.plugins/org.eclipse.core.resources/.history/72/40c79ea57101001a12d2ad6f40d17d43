@@ -1,0 +1,7 @@
+package spotpackage;
+import basic.*;
+
+public abstract class Spot {
+	
+	
+}

@@ -1,0 +1,11 @@
+package sensorpackage;
+
+import basic.Point;
+
+public class Sensor {
+	Point p;
+	public void setPosition(int x, int y) {
+		p.setPoint(x, y);
+	}
+	public Point getPosition() { return p;}
+}
