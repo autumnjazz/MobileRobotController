@@ -23,10 +23,10 @@ public class RealMap {
 		}
 		int mapsize = (col * row);
 		
-		for(int i =0; i<mapsize/5; i++) {
-			if(i%2==0) addHazard();
-			else addColorblob();
-		}
+//		for(int i =0; i<mapsize/5; i++) {
+//			if(i%2==0) addHazard();
+//			else addColorblob();
+//		}
 	}
 	
 	Point randomPoint() {

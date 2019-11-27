@@ -6,6 +6,8 @@ import spotpackage.*;
 
 public class Map {
 	public Spot board[][];
+	 
+	public Boolean visited[][]; // false:방문 X, true:방문
 	public int col; public int row;
 	
 	public ArrayList<Hazard> hlist = new ArrayList();
@@ -16,10 +18,36 @@ public class Map {
 	public void initBoard(int row, int col) {
 		this.row = row; this.col = col;
 		board = new Spot[row][col];
+		visited = new Boolean [row][col];
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j< col; j++) {
 				Spot s = new Spot();
 				board[i][j] = s;
+				visited[i][j] = false;
+			}
+		}
+		
+	}
+	
+	public void printVisited() {
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j< col; j++) {
+				if (visited[i][j]) {
+					System.out.print(1+" ");
+				}
+				else {
+					System.out.print(0+" ");
+				}
+				
+			}
+			System.out.println();
+		}
+	}
+	
+	public void clearVisited() {
+		for (int i=0;i<row;i++){
+			for (int j=0;j<col;j++) {
+				visited[i][j] = false;
 			}
 		}
 	}
