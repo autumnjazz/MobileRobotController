@@ -1,5 +1,0 @@
-package pathpackage;
-
-public interface CheckMotion {
-
-}

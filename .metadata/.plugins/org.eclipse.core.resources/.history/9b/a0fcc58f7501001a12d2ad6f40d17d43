@@ -1,7 +1,0 @@
-package spotpackage;
-
-public class Hazard extends Spot{
-	public Hazard(){
-		character = 'H';
-	}
-}

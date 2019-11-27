@@ -1,7 +1,0 @@
-package spotpackage;
-
-public class ColorBlob extends Spot{
-	ColorBlob(){
-		character = 'C';
-	}
-}

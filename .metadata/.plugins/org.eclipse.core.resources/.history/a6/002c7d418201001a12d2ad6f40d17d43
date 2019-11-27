@@ -1,8 +1,0 @@
-package sensorpackage;
-
-public class Sensor {
-	Point p;
-	public void setPosition(int x, int y) {
-		p.setPoint(x, y);
-	}
-}

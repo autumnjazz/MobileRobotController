@@ -1,8 +1,0 @@
-package spotpackage;
-
-public class ColorBlob extends Spot{
-	public ColorBlob(int x, int y){
-		character = 'C';
-		setPosition(x,y);
-	}
-}
