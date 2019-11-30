@@ -1,8 +1,0 @@
-package spotpackage;
-import basic.*;
-
-public abstract class Spot {
-	Point p;
-	public void setPosition(int x, int y) {	}
-	public Point getPosition() { return p;}
-}

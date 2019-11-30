@@ -1,7 +1,0 @@
-package spotpackage;
-
-
-public abstract class Spot {
-	Point p;
-	
-}

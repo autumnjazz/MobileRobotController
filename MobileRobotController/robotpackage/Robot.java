@@ -27,18 +27,19 @@ public class Robot implements SIM{
 	
 	public void detectSpot() {
 		//detect and update hazard
-		Point loc = hs.location(repo);
+		Point loc = hs.location(repo); //바로 다음 path 의 위험
 		boolean hresult = hs.checksensor(loc);
 		if(hresult) {
+			System.out.println("H: "+loc);
 			repo.dm.updateHazard(loc);
 			repo.m.setHazard(loc);
 		}
 		//detect and update colorblob
 		boolean[] cresult = cs.checksensorAll(repo);
-		for(int i = 0; i<4; i++) {
+		for(int i = 0; i<4; i++) { //상하좌우
 			if(cresult[i]) {
 				Point loc2 = cs.location(repo, i);
-				System.out.println("C: "+loc);
+				System.out.println("C: "+loc2);
 				repo.dm.updateColorblob(loc2);
 				repo.m.setColorblob(loc2);
 			}
@@ -56,8 +57,6 @@ public class Robot implements SIM{
 		}
 		current = next;
 	}
-	
-
 	
 }
 

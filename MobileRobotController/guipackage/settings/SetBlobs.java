@@ -29,10 +29,10 @@ public class SetBlobs extends javax.swing.JPanel {
         btnGroup.add(predefinedBtn);
     }
 
-    public void addBlobs(int realx, int realy) { //È­¸é ÁÂÇ¥ °ª
+    public void addBlobs(int realx, int realy) { //È­ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½
     	Point p;
-    	int r = (int)(realy/mapBoard1.SIZE); //Çà
-		int c = (int)(realx/mapBoard1.SIZE); //¿­
+    	int r = (int)(realy/mapBoard1.SIZE); //ï¿½ï¿½
+		int c = (int)(realx/mapBoard1.SIZE); //ï¿½ï¿½
     	if(hazardBtn.isSelected() == true) {
     		p = new Point(r,c);
     		if(!predefinedset.contains(p) && !hazardset.contains(p)) {

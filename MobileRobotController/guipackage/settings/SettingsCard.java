@@ -32,7 +32,7 @@ public class SettingsCard extends javax.swing.JPanel {
         layout.show(this, "blob");
     }
     
-    public void changeCard(String s){ //1?ù¥Î©? pos
+    public void changeCard(String s){ //1?ÔøΩÔøΩÔøΩ? pos
             layout.show(this, s);
     }
 
