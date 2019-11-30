@@ -13,8 +13,8 @@ import java.awt.CardLayout;
  */
 public class SettingsCard extends javax.swing.JPanel {
     CardLayout layout = new CardLayout();
-    SetBlobs blobPanel;
-    SetPos posPanel;
+    public SetBlobs blobPanel;
+    public SetPos posPanel;
     /**
      * Creates new form SettingsCard
      */

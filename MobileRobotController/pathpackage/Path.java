@@ -38,6 +38,7 @@ public class Path implements CheckMotion{
 		System.out.println("end");
 	}
 	
+	
 	public boolean checkmotion() {
 		//구현 필요
 		return false;

@@ -7,19 +7,22 @@ package guipackage.component;
 
 import java.awt.Graphics;
 
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 /**
  *
  * @author Darae
  */
 public class MapBoard extends javax.swing.JPanel {
 	int row; int col;
-	int SIZE = 30;
-	//TODO: add spot list
+	public int SIZE = 30;
+	
+	
 	
 	public MapBoard(int row, int col) {
 		this.row = row; this.col = col;
         initComponents();
-//		setPreferredSize(new Dimension(row*30,col*30));
+        
 	}
 	
     @Override

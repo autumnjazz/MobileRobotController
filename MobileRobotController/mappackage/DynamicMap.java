@@ -49,4 +49,5 @@ public class DynamicMap {
 		int y = p.gety();
 		board[x][y] = 'C';
 	}
+	
 }

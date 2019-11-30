@@ -15,18 +15,16 @@ public class MainFrame extends javax.swing.JFrame {
     
     CardLayout layout = new CardLayout();
     ExploringCard exploringCard;
-    SettingsCard settingCard;
+    public SettingsCard settingCard;
     FinResult result;
     
     CardLayout btnlayout = new CardLayout();
     BtnCard btncard = new BtnCard();
     
     public MainFrame() {
-        sizeInput();
         initComponents();
-        createCard(row,col);
-        createBtn();
     }
+    
     void sizeInput(){
     	SetMapSize sizeinput = new SetMapSize(new javax.swing.JFrame(), true);
         sizeinput.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -41,6 +39,7 @@ public class MainFrame extends javax.swing.JFrame {
     	row = sizeinput.row;
     	col = sizeinput.col;
     }
+    
     public void createBtn(){
         btnPanel.setLayout(layout);
         btnPanel.add(btncard,"btn");
@@ -121,7 +120,10 @@ public class MainFrame extends javax.swing.JFrame {
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                sizeInput();
+                createCard(row,col);
+                createBtn();
+                setVisible(true);
             }
         });
     }

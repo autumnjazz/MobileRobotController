@@ -16,10 +16,16 @@ public class OperateExploration_GUI {
 	public OperateExploration_GUI() {
 		main = new MainFrame();
         repo.m.initBoard(main.row, main.col);
+		main.showFrame();
+//		//TODO: while();
+//		repo.m.setHazard(
+//				main.settingCard.blobPanel.hazardset);
+//		repo.m.setPredefined(
+//				main.settingCard.blobPanel.predefinedset);
 		
 	}
 	
-    
+	
 	
 	
 	public static void main(String[] args) {

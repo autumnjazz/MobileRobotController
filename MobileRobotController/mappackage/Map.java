@@ -1,5 +1,6 @@
 package mappackage;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import basic.Point;
 import spotpackage.*;
@@ -36,6 +37,12 @@ public class Map {
 	}
 	
 	//hazard
+	public void setHazard(HashSet<Point> hash) {
+		for(Point p: hash) {
+			setHazard(p);
+		}
+	}
+	
 	public void setHazard(int x, int y) {
 		Hazard h = new Hazard(x, y);
 		hlist.add(h);
@@ -72,10 +79,20 @@ public class Map {
 	}
 	
 	//predefined
+	public void setPredefined(HashSet<Point> hash) {
+		for(Point p: hash) {
+			setPredefined(p);
+		}
+	}
 	public void setPredefined(int x, int y) {
 		Predefined p = new Predefined(x,y);
 		plist.add(p);
 		board[x][y] = p;
+	}
+	public void setPredefined(Point p) {
+		Predefined d = new Predefined(p);
+		plist.add(d);
+		board[p.getx()][p.gety()]  = d;
 	}
 	public void printPredefined() {
 		for(Predefined obj:plist) {

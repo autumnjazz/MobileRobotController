@@ -4,22 +4,59 @@
  * and open the template in the editor.
  */
 package guipackage.settings;
+
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.HashSet;
+
+import basic.Point;
+import guipackage.component.MapBoard;
+
 /**
  *
  * @author Darae
  */
 public class SetBlobs extends javax.swing.JPanel {
-	
+	public HashSet<Point> hazardset = new HashSet<Point>();
+	public HashSet<Point> predefinedset = new HashSet<Point>();
     public SetBlobs(int r, int c) {
-        mapBoard1 = new guipackage.component.MapBoard(r,c);
+        mapBoard1 = new MapBoardForSet(r,c);
         initComponents();
         //group btns
         btnGroup.add(hazardBtn);
         btnGroup.add(predefinedBtn);
     }
 
-    
-    
+    public void addBlobs(int realx, int realy) { //화면 좌표 값
+    	Point p;
+    	int r = (int)(realy/mapBoard1.SIZE); //행
+		int c = (int)(realx/mapBoard1.SIZE); //열
+    	if(hazardBtn.isSelected() == true) {
+    		p = new Point(r,c);
+    		if(!predefinedset.contains(p) && !hazardset.contains(p)) {
+        		hazardset.add(p);
+        		System.out.println("H"+p); //test
+        		repaint();
+    		}
+    		else if(hazardset.contains(p)) {
+    			hazardset.remove(p);
+    			repaint();
+    		}
+    	}else if(predefinedBtn.isSelected() == true) {
+    		p = new Point(r,c);
+    		if(!predefinedset.contains(p) && !hazardset.contains(p)) {
+	    		predefinedset.add(p);
+	    		System.out.println("P"+p); //test
+	    		repaint();
+    		}
+    		else if(predefinedset.contains(p)) {
+    			predefinedset.remove(p);
+    			repaint();
+    		}
+    	}
+    }
     
     //gui
     @SuppressWarnings("unchecked")
@@ -124,10 +161,87 @@ public class SetBlobs extends javax.swing.JPanel {
     private javax.swing.ButtonGroup btnGroup;
     private javax.swing.JRadioButton hazardBtn;
     private java.awt.Label infoLabel;
-    private guipackage.component.MapBoard mapBoard1;
+    private MapBoardForSet mapBoard1;
     private javax.swing.JRadioButton predefinedBtn;
     private javax.swing.JScrollPane scroll;
     private java.awt.Label sizeLabel;
     private javax.swing.JPanel sizePanel;
     // End of variables declaration//GEN-END:variables
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //inner class
+    class MapBoardForSet extends MapBoard {
+    	
+    	public MapBoardForSet(int row, int col) {
+    		super(row,col);
+    		addMouseListener(new MouseListener() {
+        	    @Override
+        	    public void mouseClicked(MouseEvent e) {
+        	    	int realx = e.getX();
+        	    	int realy = e.getY();
+        	    	if(0<realx && realx<SIZE*col && 0<realy && realy<SIZE*row) {
+        	    		addBlobs(realx,realy);
+        	    	}
+        	    }
+
+    			@Override
+    			public void mousePressed(MouseEvent e) {
+    				// TODO Auto-generated method stub
+    				
+    			}
+
+    			@Override
+    			public void mouseReleased(MouseEvent e) {
+    				// TODO Auto-generated method stub
+    				
+    			}
+
+    			@Override
+    			public void mouseEntered(MouseEvent e) {
+    				// TODO Auto-generated method stub
+    				
+    			}
+
+    			@Override
+    			public void mouseExited(MouseEvent e) {
+    				// TODO Auto-generated method stub
+    				
+    			}
+        	});
+    	}
+    	
+    	
+    	public void paint(Graphics g) {
+    		super.paint(g);
+    		g.setFont(new Font("TimesRoman", Font.PLAIN, 15)); 
+    		int centerr,centerc;
+    		for(Point p: hazardset) {
+    			centerr = p.getx()*SIZE+ 10;
+    			centerc = p.gety()*SIZE+ 20;
+    			g.drawString("H", centerc, centerr);
+    		}
+    		g.setFont(new Font("TimesRoman", Font.PLAIN, 15)); 
+    		for(Point p: predefinedset) {
+    			centerr = p.getx()*SIZE + 10;
+    			centerc = p.gety()*SIZE +20;
+    			g.drawString("P", centerc, centerr);
+    		}
+    	}
+
+    }
+
+   
 }
