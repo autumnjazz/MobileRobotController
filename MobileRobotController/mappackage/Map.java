@@ -7,7 +7,7 @@ import spotpackage.*;
 public class Map {
 	public Spot board[][];
 	 
-	public Boolean visited[][]; // false:방문 X, true:방문
+	public Boolean visited[][]; // false:
 	public int col; public int row;
 	
 	public ArrayList<Hazard> hlist = new ArrayList();
@@ -29,20 +29,6 @@ public class Map {
 		
 	}
 	
-	public void printVisited() {
-		for (int i = 0; i < row; i++) {
-			for (int j = 0; j< col; j++) {
-				if (visited[i][j]) {
-					System.out.print(1+" ");
-				}
-				else {
-					System.out.print(0+" ");
-				}
-				
-			}
-			System.out.println();
-		}
-	}
 	
 	public void clearVisited() {
 		for (int i=0;i<row;i++){
@@ -112,4 +98,9 @@ public class Map {
 		System.out.println();
 	}
 	
+	//visited
+	public void setVisited(int x, int y) {
+		VisitedSpot p = new VisitedSpot(x,y);
+		board[x][y] = p;
+	}
 }

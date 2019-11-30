@@ -12,7 +12,7 @@ import spotpackage.*;
 public class OperateExploration {
 	
 	public Repository repo = new Repository();
-	RealMap rm;
+	RealMap rm; //repo에 저장 안됨
 	public Robot robot = new Robot(repo);
 	
 	Scanner sc = new Scanner(System.in);
@@ -52,9 +52,9 @@ public class OperateExploration {
 	}
 	
 	public void setreal() {
-        rm = new RealMap(repo.m); //실제 지도도 생성
-        robot.hs.setRM(rm);
-        robot.cs.setRM(rm);
+        rm = new RealMap(repo.m); //repository 의 map 으로 실제 지도 생성
+        robot.hs.setRM(rm); //로봇의 hazard sensor 에 실제 지도 정보
+        robot.cs.setRM(rm); //로봇의 colorblob sensor에 실제 지도 정보
 	}
 	
 	public void inputrobotinfo() {
@@ -62,13 +62,13 @@ public class OperateExploration {
         int x,y;
         x = sc.nextInt();
         y = sc.nextInt();
-        robot.setCurrent(x, y);
-        Point p = new Point(x,y);
-        repo.setDM(p);
+        robot.setCurrent(x, y); //첫 시작 위치 받기
+        Point p = new Point(x,y); 
+        repo.setDM(p); //dynamic map(실제 보여지는 부분)에 현재 위치 표시
         
 	}
 	
-	public void createpath() {
+	public void createpath() { 
 		repo.p.calculatePath(repo.m, robot.getCurrent());
 	}
 
@@ -88,9 +88,14 @@ public class OperateExploration {
 				System.out.println("finished exploring!");
 				break;
 			}
-			robot.detectSpot();
-			robot.move();
 			repo.printDMap();
+			System.out.print("Next path before detecting: ");
+			System.out.println(robot.readpath());
+			robot.detectSpot();
+			createpath();
+			System.out.print("Path after detecting: ");
+			System.out.println(robot.readpath());
+			robot.move();
 			System.out.println("continue exploring? (y/n) : ");
 			
 			c = sc.next().charAt(0);
@@ -116,7 +121,6 @@ public class OperateExploration {
 			oe.explore();
 			oe.printall();
 		}
-		
 		
 
 	}
