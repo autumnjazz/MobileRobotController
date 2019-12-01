@@ -21,4 +21,16 @@ public class Predefined extends Spot{
 	public boolean getVisited() {
 		return visited;
 	}
+	
+	@Override
+	public boolean equals(Object v) {
+        boolean retVal = false;
+        if (v!=null && v instanceof Predefined){
+        	Predefined p = (Predefined) v;
+            retVal = 
+         		(p.getPosition() == this.getPosition());
+        }
+
+     return retVal;
+	}
 }

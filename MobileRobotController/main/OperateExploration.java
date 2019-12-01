@@ -93,9 +93,11 @@ public class OperateExploration {
 			System.out.println(robot.readpath());
 			robot.detectSpot();
 			createpath();
-			System.out.print("Path after detecting: ");
+			System.out.print("Next Path after detecting: ");
 			System.out.println(robot.readpath());
+			repo.p.printPath();
 			robot.move();
+			repo.p.checkmotion();
 			System.out.println("continue exploring? (y/n) : ");
 			
 			c = sc.next().charAt(0);

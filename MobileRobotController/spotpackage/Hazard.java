@@ -12,4 +12,16 @@ public class Hazard extends Spot{
 		character = 'H';
 		setPosition(p.getx(),p.gety());
 	}
+	
+	@Override
+	public boolean equals(Object v) {
+        boolean retVal = false;
+        if (v!=null && v instanceof Hazard){
+            Hazard p = (Hazard) v;
+            retVal = 
+         		(p.getPosition() == this.getPosition());
+        }
+
+     return retVal;
+	}
 }

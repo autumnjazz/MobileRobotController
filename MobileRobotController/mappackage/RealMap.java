@@ -39,11 +39,15 @@ public class RealMap {
 	
 	void addHazard() {
 		Point hp = randomPoint();
-		board[hp.getx()][hp.gety()] = 'H';
+		if(!m.checkcontains(hp)) {
+			board[hp.getx()][hp.gety()] = 'H';	
+		}
 	}
 	void addColorblob() {
 		Point cp = randomPoint();
+		if(!m.checkcontains(cp)) {
 		board[cp.getx()][cp.gety()] = 'C';
+		}
 	}
 	
 	//Only for Test!

@@ -91,6 +91,14 @@ public class Path implements CheckMotion{
 		return next;
 	}
 	
+	public Point getPath(int idx) { //현재 좌표값이 파라미터
+		Point next = new Point();
+		if(idx == pathlist.size()-1) return null; //no more path
+		next = pathlist.get(idx+1);
+		if(next.getx() == -1) next = null;
+		return next;
+	}
+	
 	public void printPath() {
 		for(Point obj:pathlist) {
 			System.out.print(obj +" -> ");

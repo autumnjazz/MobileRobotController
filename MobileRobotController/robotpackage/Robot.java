@@ -7,6 +7,7 @@ import sensorpackage.*;
 
 public class Robot implements SIM{
 	Point current = new Point();
+	int currentidx = 0;
 	public ColorBlobSensor cs = new ColorBlobSensor();
 	public HazardSensor hs = new HazardSensor();
 	public PositionSensor ps = new PositionSensor();
@@ -47,7 +48,7 @@ public class Robot implements SIM{
 	}
 	
 	public Point readpath() {
-		return repo.p.getPath(current);
+		return repo.p.getPath(currentidx);
 	}
 	
 	public void move() { //잘못된 이동 구현
@@ -56,7 +57,13 @@ public class Robot implements SIM{
 			repo.dm.updateRobot(current, next);
 		}
 		current = next;
+		currentidx +=1;
 	}
+	
+//	Point randommove() {
+//		Point rand;		
+//		return rand;
+//	}
 	
 }
 

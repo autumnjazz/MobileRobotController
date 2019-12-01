@@ -8,7 +8,7 @@ import guipackage.settings.*;
 
 
 public class MainFrame extends javax.swing.JFrame {
-    
+    public boolean chkenter;
 	public int col; public int row;
 	
     FinAlert finalert;
@@ -338,6 +338,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         private void enterBtnActionPerformed(java.awt.event.ActionEvent evt) {                                         
             if(enterBtn.getText().equals("Enter")){
+                chkenter = true;
+                System.out.println(chkenter);
                 enterBtn.setText("Start");
                 settingCard.changeCard("pos");
             }

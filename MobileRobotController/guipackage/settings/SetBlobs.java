@@ -29,32 +29,21 @@ public class SetBlobs extends javax.swing.JPanel {
         btnGroup.add(predefinedBtn);
     }
 
-    public void addBlobs(int realx, int realy) { //ȭ�� ��ǥ ��
+    public void addBlobs(int realx, int realy) { 
     	Point p;
-    	int r = (int)(realy/mapBoard1.SIZE); //��
-		int c = (int)(realx/mapBoard1.SIZE); //��
+    	int r = (int)(realy/mapBoard1.SIZE); 
+		int c = (int)(realx/mapBoard1.SIZE); 
     	if(hazardBtn.isSelected() == true) {
     		p = new Point(r,c);
-    		if(!predefinedset.contains(p) && !hazardset.contains(p)) {
-        		hazardset.add(p);
-        		System.out.println("H"+p); //test
-        		repaint();
-    		}
-    		else if(hazardset.contains(p)) {
-    			hazardset.remove(p);
-    			repaint();
-    		}
+    		hazardset.add(p);
+    		hazardset.removeAll(predefinedset);
+    		repaint();
+    		
     	}else if(predefinedBtn.isSelected() == true) {
     		p = new Point(r,c);
-    		if(!predefinedset.contains(p) && !hazardset.contains(p)) {
-	    		predefinedset.add(p);
-	    		System.out.println("P"+p); //test
-	    		repaint();
-    		}
-    		else if(predefinedset.contains(p)) {
-    			predefinedset.remove(p);
-    			repaint();
-    		}
+    		predefinedset.add(p);
+    		predefinedset.removeAll(hazardset);
+    		repaint();
     	}
     }
     
@@ -190,17 +179,17 @@ public class SetBlobs extends javax.swing.JPanel {
     		addMouseListener(new MouseListener() {
         	    @Override
         	    public void mouseClicked(MouseEvent e) {
-        	    	int realx = e.getX();
-        	    	int realy = e.getY();
-        	    	if(0<realx && realx<SIZE*col && 0<realy && realy<SIZE*row) {
-        	    		addBlobs(realx,realy);
-        	    	}
+        	    	
         	    }
 
     			@Override
     			public void mousePressed(MouseEvent e) {
     				// TODO Auto-generated method stub
-    				
+    				int realx = e.getX();
+        	    	int realy = e.getY();
+        	    	if(0<realx && realx<SIZE*col && 0<realy && realy<SIZE*row) {
+        	    		addBlobs(realx,realy);
+        	    	}
     			}
 
     			@Override

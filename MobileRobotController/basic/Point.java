@@ -35,7 +35,16 @@ public class Point {
 		return "("+x+","+y+")";
 	}
 	
-	public boolean equals(Point p) {
-		return this.toString().equals(p.toString());
-	}
+	@Override
+	public boolean equals(Object v) {
+        boolean retVal = false;
+        if (v!=null && v instanceof Point){
+            Point p = (Point) v;
+            retVal = 
+         		(p.getx() == this.getx()) 
+         		&& (p.gety() == this.gety());
+        }
+
+     return retVal;
+  }
 }

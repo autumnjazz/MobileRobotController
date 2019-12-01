@@ -17,12 +17,16 @@ public class OperateExploration_GUI {
 		main = new MainFrame();
         repo.m.initBoard(main.row, main.col);
 		main.showFrame();
-//		//TODO: while();
-//		repo.m.setHazard(
-//				main.settingCard.blobPanel.hazardset);
-//		repo.m.setPredefined(
-//				main.settingCard.blobPanel.predefinedset);
-		
+		boolean chk = false;
+		while(!chk) {
+			chk = main.chkenter;
+		}
+		System.out.println("finished while");
+		repo.m.setHazard(
+				main.settingCard.blobPanel.hazardset);
+		repo.m.setPredefined(
+				main.settingCard.blobPanel.predefinedset);
+		repo.m.printBoard();
 	}
 	
 	
