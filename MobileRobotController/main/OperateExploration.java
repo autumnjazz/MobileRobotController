@@ -52,7 +52,7 @@ public class OperateExploration {
 	}
 	
 	public void setreal() {
-        rm = new RealMap(repo.m); //½ÇÁ¦ Áöµµµµ »ý¼º
+        rm = new RealMap(repo.m); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         robot.hs.setRM(rm);
         robot.cs.setRM(rm);
 	}
@@ -89,6 +89,7 @@ public class OperateExploration {
 				break;
 			}
 			robot.detectSpot();
+			repo.p.calculatePath(repo.m, robot.getCurrent());
 			robot.move();
 			repo.printDMap();
 			System.out.println("continue exploring? (y/n) : ");
@@ -102,14 +103,14 @@ public class OperateExploration {
 	public static void main(String[] args) {
 		OperateExploration oe = new OperateExploration();
 		
-		//ÁØºñ
+		//ï¿½Øºï¿½
 		oe.inputmapinfo();
 		oe.inputrobotinfo();
 		oe.createpath();
 		oe.setreal();
 		oe.printall();
 		
-		//½ÃÀÛ
+		//ï¿½ï¿½ï¿½ï¿½
 		System.out.println("Start Exploring? (y/n): ");
 		Scanner sc = new Scanner(System.in); char c;
 		if(sc.next().charAt(0) == 'y') {

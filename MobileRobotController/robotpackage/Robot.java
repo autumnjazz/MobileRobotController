@@ -32,6 +32,8 @@ public class Robot implements SIM{
 		if(hresult) {
 			repo.dm.updateHazard(loc);
 			repo.m.setHazard(loc);
+			repo.p.avoidHarzard(loc);
+			// 
 		}
 		//detect and update colorblob
 		boolean[] cresult = cs.checksensorAll(repo);
@@ -49,7 +51,7 @@ public class Robot implements SIM{
 		return repo.p.getPath(current);
 	}
 	
-	public void move() { //잘못된 이동 구현
+	public void move() { 
 		Point next = readpath();
 		if(next != null) {
 			repo.dm.updateRobot(current, next);
