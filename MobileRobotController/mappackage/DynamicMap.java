@@ -10,7 +10,8 @@ public class DynamicMap {
 	private char board[][];
 	public Point current;
 	
-	public void setDM(Map m, Point current) {
+	public void setDM(Map m, Point current) { 
+		//실제지도 정보를 받아서 dynamic map에 그대로 그림으로써 초기화
 		this.m = m; this.current = current;
 		board = new char[m.row][m.col];
 		for (int i = 0; i < m.row; i++) {
@@ -18,7 +19,7 @@ public class DynamicMap {
 				board[i][j] = m.board[i][j].getCharacter();
 			}
 		}
-		board[current.getx()][current.gety()] = '*';
+		board[current.getx()][current.gety()] = '*'; //현재위치 표시
 	}
 	public void printBoard() {
 		for (int i = 0; i < m.row; i++) {
@@ -49,4 +50,5 @@ public class DynamicMap {
 		int y = p.gety();
 		board[x][y] = 'C';
 	}
+	
 }

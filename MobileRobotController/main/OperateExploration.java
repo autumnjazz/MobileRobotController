@@ -12,7 +12,7 @@ import spotpackage.*;
 public class OperateExploration {
 	
 	public Repository repo = new Repository();
-	RealMap rm;
+	RealMap rm; //repo�� ���� �ȵ�
 	public Robot robot = new Robot(repo);
 	
 	Scanner sc = new Scanner(System.in);
@@ -52,9 +52,15 @@ public class OperateExploration {
 	}
 	
 	public void setreal() {
+
         rm = new RealMap(repo.m); //���� ������ ����
         robot.hs.setRM(rm);
         robot.cs.setRM(rm);
+
+        rm = new RealMap(repo.m); //repository �� map ���� ���� ���� ����
+        robot.hs.setRM(rm); //�κ��� hazard sensor �� ���� ���� ����
+        robot.cs.setRM(rm); //�κ��� colorblob sensor�� ���� ���� ����
+
 	}
 	
 	public void inputrobotinfo() {
@@ -62,13 +68,13 @@ public class OperateExploration {
         int x,y;
         x = sc.nextInt();
         y = sc.nextInt();
-        robot.setCurrent(x, y);
-        Point p = new Point(x,y);
-        repo.setDM(p);
+        robot.setCurrent(x, y); //ù ���� ��ġ �ޱ�
+        Point p = new Point(x,y); 
+        repo.setDM(p); //dynamic map(���� �������� �κ�)�� ���� ��ġ ǥ��
         
 	}
 	
-	public void createpath() {
+	public void createpath() { 
 		repo.p.calculatePath(repo.m, robot.getCurrent());
 	}
 
@@ -88,10 +94,23 @@ public class OperateExploration {
 				System.out.println("finished exploring!");
 				break;
 			}
-			robot.detectSpot();
-			repo.p.calculatePath(repo.m, robot.getCurrent());
-			robot.move();
 			repo.printDMap();
+			System.out.print("Next path before detecting: ");
+			System.out.println(robot.readpath());
+			robot.detectSpot();
+
+			createpath();
+			System.out.print("Next Path after detecting: ");
+			System.out.println(robot.readpath());
+			repo.p.printPath();
+
+			robot.move();
+			Boolean checkmotionFlag = repo.p.checkmotion(robot);
+			// 에러가 난 경
+			if (!checkmotionFlag) {
+				// 뒤로 가는 함수가 굳이 필요한가? 그냥 두 칸 이동한 곳에서 경로 재생성하니까 문제 없을 듯 
+				repo.p.clearPath();
+			}
 			System.out.println("continue exploring? (y/n) : ");
 			
 			c = sc.next().charAt(0);
@@ -117,7 +136,6 @@ public class OperateExploration {
 			oe.explore();
 			oe.printall();
 		}
-		
 		
 
 	}

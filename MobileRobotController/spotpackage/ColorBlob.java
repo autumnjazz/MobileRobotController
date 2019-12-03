@@ -11,4 +11,15 @@ public class ColorBlob extends Spot{
 		character = 'C';
 		setPosition(p.getx(),p.gety());
 	}
+	@Override
+	public boolean equals(Object v) {
+        boolean retVal = false;
+        if (v!=null && v instanceof ColorBlob){
+        	ColorBlob p = (ColorBlob) v;
+            retVal = 
+         		(p.getPosition() == this.getPosition());
+        }
+
+     return retVal;
+	}
 }

@@ -5,56 +5,20 @@ import java.util.LinkedList;
 
 import basic.Point;
 import mappackage.Map;
+import robotpackage.Robot;
 import spotpackage.Predefined;
 
-public class Path implements CheckMotion{
+public class Path {
 	public ArrayList<Point> pathlist = new ArrayList();
 	
-	
-	
-	public void calculatePath(Map m, Point p) {	
-		
-		System.out.println("calculatePath 실행");
-		int robot_x= p.getx();
-		int robot_y= p.gety();
-		
-		System.out.println("robot의 위치 : "+"("+robot_x+","+robot_y+")");
-		
-		for (int i=0;i<m.row;i++) {
-			for (int j=0;j<m.col;j++) {
-				System.out.print(m.board[i][j].getCharacter());
-			}
-			System.out.println();
-		}
-		
-		bfs(p,m);
-		System.out.println("pathlist 배열:");
-		for (Point obj:pathlist) {
-			System.out.println(obj.getx()+","+obj.gety());
-		}
-//		System.out.println("visited 배열:");
-//		m.printVisited();
-//		for(int i = 1; ; i++) {
-//			pathlist.add(p);
-//			if(i%2 !=0) x++;
-//			else if (i%2 ==0) y++;
-//			if(x >= m.row || y >= m.col) break;
-//		}
-		
-	}
-	
-	public void bfs(Point robot_p, Map m) {
+	public void calculatePath(Map m, Point robot_p) {	
 		LinkedList <Point> queue = new LinkedList <Point>();
 		queue.add(robot_p);
 		
-		
-		
 		while(!queue.isEmpty()) {
-			
 			Boolean end_flag = true;
-			// predefined 에 전부 방문 했으면 종료
+			
 			for (Predefined obj:m.plist) {
-				// 아직 방문하지 않은 predefined 가 하나라도 있으면 끝내지 않는다.
 				if (!obj.getVisited()) {
 					end_flag = false;
 				}	
@@ -62,63 +26,57 @@ public class Path implements CheckMotion{
 			
 			if (end_flag) break;
 			
-			//해당 큐의 맨 앞에 있는(제일 먼저 저장된) 요소를 반환하고, 해당 요소를 큐에서 제거함.
-			//만약 큐가 비어있으면 null을 반환함.
-			Point p = (Point) queue.poll();
+			Point p =  queue.poll();
 			int now_x = p.getx();
 			int now_y = p.gety();
-			System.out.println("로봇이 밟는 땅:" + now_x + " "+ now_y);
 			m.visited[now_x][now_y] = true;
 			
-			
-			
-			System.out.println("predefined 지점:");
 			for (Predefined obj:m.plist) {
 				if (!obj.getVisited()) {
 					if (now_x == obj.getPosition().getx() && now_y == obj.getPosition().gety()) {
 						int listSize = pathlist.size();
 						while (true) {
-							if (p==null) break;
+
 							pathlist.add(listSize,p);
-							p = p.prev_p;
+							if (p.getPrev_p() == null) {
+								//처음을 제외한 나머지 추가의 경우, 앞선 경로의 마지막과 새로 추가하는 첫번쨰 경로가 이어져 있지않기 때문에 별도로 이어주자.
+								if (listSize > 0) {
+									p.setPrev_p(pathlist.get(listSize-1));
+									System.out.println("경로를 잇기 위해서 "+p+ " 의 이전으로 "+pathlist.get(listSize-1));	
+								}
+								
+								break;
+							}
+							p = p.getPrev_p();
 						}
-						m.printVisited();
-						// 하나의 predefined 를 찾았으니 전체적으로 초기화하고 다음 predefined 찾
 						m.clearVisited();
 						queue.clear();
-						queue.add(new Point(obj.getPosition().getx(),obj.getPosition().gety() ));
+						queue.add(new Point(now_x,now_y));
 						obj.setVisited(true);
 						break;
 					}	
-					System.out.println(obj.getPosition().getx()+","+obj.getPosition().gety());
 				}
-				System.out.println();
 			}
 
-			
-			
-			// 위
+		
 			if (now_x-1>=0 && m.visited[now_x-1][now_y] == false) {
 				char temp = m.board[now_x-1][now_y].getCharacter();
 				if (temp == '.' || temp == 'P') {
 					queue.add(new Point(now_x-1, now_y,p));
 				}
 			}
-			// 아래
 			if (now_x+1<m.row && m.visited[now_x+1][now_y] == false) {
 				char temp = m.board[now_x+1][now_y].getCharacter();
 				if (temp == '.' || temp == 'P') {
 					queue.add(new Point(now_x+1, now_y,p));
 				}
 			}
-			// 왼쪽
 			if (now_y-1>=0 && m.visited[now_x][now_y-1] == false) {
 				char temp = m.board[now_x][now_y-1].getCharacter();
 				if (temp == '.' || temp == 'P') {
 					queue.add(new Point(now_x, now_y-1,p));
 				}
 			}
-			// 오른쪽
 			if (now_y+1<m.col && m.visited[now_x][now_y+1] == false) {
 				char temp = m.board[now_x][now_y+1].getCharacter();
 				if (temp == '.' || temp == 'P') {
@@ -130,7 +88,7 @@ public class Path implements CheckMotion{
 		queue.clear();
 	}
 	
-	public Point getPath(Point p) {
+	public Point getPath(Point p) { //���� ��ǥ���� �Ķ����
 		Point next = new Point();
 		for(Point obj:pathlist) {
 			if(obj.equals(p)) {
@@ -143,6 +101,18 @@ public class Path implements CheckMotion{
 		return next;
 	}
 	
+	public Point getPath(int idx) { //���� ��ǥ���� �Ķ����
+		Point next = new Point();
+		if(idx == pathlist.size()-1) return null; //no more path
+		next = pathlist.get(idx+1);
+		if(next.getx() == -1) next = null;
+		return next;
+	}
+	
+	public void clearPath() {
+		pathlist.clear();
+	}
+	
 	public void printPath() {
 		for(Point obj:pathlist) {
 			System.out.print(obj +" -> ");
@@ -150,9 +120,27 @@ public class Path implements CheckMotion{
 		System.out.println("end");
 	}
 	
-	public boolean checkmotion() {
-		//���� �ʿ�
-		return false;
+	
+	public boolean checkmotion(Robot robot) {
+		Point current = robot.getCurrent();
+		Point prev = current.getPrev_p();
+		
+		double distance = calculateDistance(current, prev);
+		
+		if (distance == 1) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public double calculateDistance(Point p1, Point p2) {
+		int disX = p1.getx() - p2.getx();
+		int disY = p1.gety() - p2.gety();
+		double distance = Math.pow((Math.pow(disX,2)+ Math.pow(disY,2)),1/2); 
+		return distance;
 	}
 	
 }
+

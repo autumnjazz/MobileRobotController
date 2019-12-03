@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /EnterBlobs.class
 /EnterMapSize.class
 /EnterPos.class
@@ -6,3 +7,18 @@
 /Notification.class
 /ViewFinalResult.class
 /ViewPresentResult.class
+=======
+/FinResult.class
+/MainFrame$1.class
+/MainFrame$2.class
+/MainFrame$BtnCard.class
+/MainFrame$ExpBtn$1.class
+/MainFrame$ExpBtn$2.class
+/MainFrame$ExpBtn.class
+/MainFrame$OneBtn$1.class
+/MainFrame$OneBtn.class
+/MainFrame$TwoBtn$1.class
+/MainFrame$TwoBtn$2.class
+/MainFrame$TwoBtn.class
+/MainFrame.class
+>>>>>>> 1ac6f6980302a3123021836915f4d1a431e07901

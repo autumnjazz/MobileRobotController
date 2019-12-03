@@ -23,10 +23,11 @@ public class RealMap {
 		}
 		int mapsize = (col * row);
 		
-//		for(int i =0; i<mapsize/5; i++) {
-//			if(i%2==0) addHazard();
-//			else addColorblob();
-//		}
+		//랜덤으로 hazard blob & color blob 추가! 주석 ㄴㄴ
+		for(int i =0; i<mapsize/5; i++) {
+			if(i%2==0) addHazard();
+			else addColorblob();
+		}
 	}
 	
 	Point randomPoint() {
@@ -38,11 +39,15 @@ public class RealMap {
 	
 	void addHazard() {
 		Point hp = randomPoint();
-		board[hp.getx()][hp.gety()] = 'H';
+		if(!m.checkcontains(hp)) {
+			board[hp.getx()][hp.gety()] = 'H';	
+		}
 	}
 	void addColorblob() {
 		Point cp = randomPoint();
+		if(!m.checkcontains(cp)) {
 		board[cp.getx()][cp.gety()] = 'C';
+		}
 	}
 	
 	//Only for Test!
