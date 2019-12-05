@@ -1,6 +1,7 @@
 package guipackage;
 
 import java.awt.CardLayout;
+import java.awt.Graphics;
 
 import basic.Point;
 import guipackage.alert.*;
@@ -102,8 +103,19 @@ public class MainFrame extends javax.swing.JFrame {
 			robot.move();
 			repo.p.checkmotion();
 		}while(true);
+		System.out.println("finished while");
+		finishalert();
     }
     
+    public synchronized void finishalert() {
+    	System.out.println("started alert()");
+		finalert= new FinAlert(new javax.swing.JFrame(), true);
+		finalert.setLocationRelativeTo(null);  
+		finalert.setVisible(true);
+		while(!finalert.isPerformed);
+        layout.show(contentPanel,"result");
+        btncard.changeCard("btn2");
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -180,11 +192,6 @@ public class MainFrame extends javax.swing.JFrame {
 
     private javax.swing.JPanel btnPanel;
     private javax.swing.JPanel contentPanel;
-    
-    
-    
-    
-    
     
     
     

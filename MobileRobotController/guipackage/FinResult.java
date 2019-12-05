@@ -5,19 +5,26 @@ package guipackage;
  * and open the template in the editor.
  */
 
+import java.awt.Font;
+import java.awt.Graphics;
+
+import basic.Point;
+import guipackage.component.MapBoard;
 import mappackage.Map;
+import spotpackage.Spot;
 
 /**
  *
  * @author Darae
  */
 public class FinResult extends javax.swing.JPanel {
-
+	Map m;
     /**
      * Creates new form FinResult
      */
     public FinResult(Map m) {
-        mapBoard2 = new guipackage.component.MapBoard(m.row,m.col);
+    	this.m = m;
+        mapBoard2 = new MapBoardForShow(m.row,m.col);
         initComponents();
     }
 
@@ -87,4 +94,46 @@ public class FinResult extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private guipackage.component.MapBoard mapBoard2;
     // End of variables declaration//GEN-END:variables
+    
+    
+    
+    //ineerclass
+    
+
+    
+    
+    class MapBoardForShow extends MapBoard {
+    	public MapBoardForShow(int row, int col) {
+    		super(row,col);
+    	}
+    	
+
+    	public void paint(Graphics g) {
+    		super.paint(g);
+    		g.setFont(new Font("TimesRoman", Font.PLAIN, 15)); 
+    		int centerr,centerc;
+    		for(Spot h: m.hlist) {
+    			Point p = h.getPosition();
+    			centerr = p.getx()*SIZE+ 10;
+    			centerc = p.gety()*SIZE+ 20;
+    			g.drawString("H", centerc, centerr);
+    		}
+    		g.setFont(new Font("TimesRoman", Font.PLAIN, 15)); 
+    		for(Spot pd: m.plist) {
+    			Point p = pd.getPosition();
+    			centerr = p.getx()*SIZE + 10;
+    			centerc = p.gety()*SIZE +20;
+    			g.drawString("P", centerc, centerr);
+    		}
+    		g.setFont(new Font("TimesRoman", Font.PLAIN, 15)); 
+    		for(Spot c: m.clist) {
+    			Point p = c.getPosition();
+    			centerr = p.getx()*SIZE + 10;
+    			centerc = p.gety()*SIZE +20;
+    			g.drawString("C", centerc, centerr);
+    		}
+    	}
+    }
+    
+    
 }
