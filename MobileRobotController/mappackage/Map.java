@@ -11,9 +11,9 @@ public class Map {
 	public Boolean visited[][]; // false:
 	public int col; public int row;
 	
-	public ArrayList<Hazard> hlist = new ArrayList();
-	public ArrayList<ColorBlob> clist = new ArrayList();
-	public ArrayList<Predefined> plist = new ArrayList();
+	public ArrayList<Spot> hlist = new ArrayList();
+	public ArrayList<Spot> clist = new ArrayList();
+	public ArrayList<Spot> plist = new ArrayList();
 	
 	//board
 	public void initBoard(int row, int col) {
@@ -22,14 +22,13 @@ public class Map {
 		visited = new Boolean [row][col];
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j< col; j++) {
-				Spot s = new Spot();
+				Spot s = new Spot(i,j);
 				board[i][j] = s;
 				visited[i][j] = false;
 			}
 		}
 		
 	}
-	
 	
 	public void clearVisited() {
 		for (int i=0;i<row;i++){
@@ -51,101 +50,72 @@ public class Map {
 	}
 	
 	//hazard
-	public void setHazard(HashSet<Point> hash) {
-		for(Point p: hash) {
-			setHazard(p);
-		}
-	}
-	
-	public void setHazard(int x, int y) {
-		if(!checkcontains(new Point(x,y))) {
-			Hazard h = new Hazard(x, y);
+
+	public void setHazard(Point p) {
+		
+		Hazard h = new Hazard(p);
+		if(!checkcontains(hlist,h)) {
 			hlist.add(h);
-			board[x][y]  = h;
+			board[p.getx()][p.gety()]  = h;
+		}
+		else if(checkcontains(hlist,h)) {
+			hlist.remove(h);
+			Spot s = new Spot(p.getx(), p.gety());
+			board[p.getx()][p.gety()]  = s;
 		}
 		else {
 			System.out.println("this point already belongs to other lists");
 		}
 	}
-	public void setHazard(Point p) {
-		if(!checkcontains(p)) {
-			Hazard h = new Hazard(p);
-		hlist.add(h);
-		board[p.getx()][p.gety()]  = h;
-		}else {
-			System.out.println("this point already belongs to other lists");
-		}
-	}
-	public void printHazard() {
-		for(Hazard obj:hlist) {
-			System.out.print(obj.getPosition() + " ");
-		}
-		System.out.println();
-	}
 	
 	//colorblob
 	public void setColorblob(int x, int y) {
-		if(!checkcontains(new Point(x,y))) {
-			ColorBlob c = new ColorBlob(x, y);
-		clist.add(c);
-		board[x][y]  = c;
-		}else {
-			System.out.println("this point already belongs to other lists");
+		char spot = board[x][y].getCharacter();
+		ColorBlob c = new ColorBlob(x,y);
+		if(spot == '.') {
+			clist.add(c);
+			board[x][y]  = c;
 		}
 	}
 	public void setColorblob(Point p) {
-		if(!checkcontains(p)) {
-			ColorBlob c = new ColorBlob(p);
-		clist.add(c);
-		board[p.getx()][p.gety()]  = c;
-		}else {
-			System.out.println("this point already belongs to other lists");
+		char spot = board[p.getx()][p.gety()].getCharacter();
+		ColorBlob c = new ColorBlob(p);
+		if(spot == '.') {
+			clist.add(c);
+			board[p.getx()][p.gety()]  = c;
 		}
-	}
-	public void printColorblob() {
-		for(ColorBlob obj:clist) {
-			System.out.print(obj.getPosition()+" ");
-		}
-		System.out.println();
 	}
 	
 	//predefined
-	public void setPredefined(HashSet<Point> hash) {
-		for(Point p: hash) {
-			setPredefined(p);
-		}
-	}
-	public void setPredefined(int x, int y) {
-		if(!checkcontains(new Point(x,y))) {
-			Predefined p = new Predefined(x,y);
-		plist.add(p);
-		board[x][y] = p;
-		}else {
-			System.out.println("this point already belongs to other lists");
-		}
-	}
 	public void setPredefined(Point p) {
-		if(!checkcontains(p)) {
-			Predefined d = new Predefined(p);
-		plist.add(d);
-		board[p.getx()][p.gety()]  = d;
-		}else {
+		char spot = board[p.getx()][p.gety()].getCharacter();
+		Predefined pd = new Predefined(p);
+		if(spot == '.') {
+			plist.add(pd);
+			board[p.getx()][p.gety()]  = pd;
+		}
+		else if(spot == 'P') {
+			plist.remove(pd);
+			board[p.getx()][p.gety()]  = new Spot(p.getx(), p.gety());
+		}
+		else {
 			System.out.println("this point already belongs to other lists");
 		}
 	}
-	public void printPredefined() {
-		for(Predefined obj:plist) {
+	
+	
+	//shared method
+	public boolean checkcontains(ArrayList<Spot> spotlist, Spot obj) {
+		if(spotlist.contains(obj)) {
+			return true;
+		}
+		return false;
+	};
+	
+	public void printlist(ArrayList<Spot> spotlist) {
+		for(Spot obj: spotlist) {
 			System.out.print(obj.getPosition()+ " ");
 		}
 		System.out.println();
 	}
-	
-	//before setblobs
-	public boolean checkcontains(Point p) {
-		if(board[p.getx()][p.gety()].getCharacter() == '.')
-			return false;
-		return true;
-	}
-	
-	
 }

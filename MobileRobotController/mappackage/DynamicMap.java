@@ -6,13 +6,15 @@ import spotpackage.*;
 import robotpackage.Robot;
 
 public class DynamicMap {
-	Map m;
+	public Map m;
 	private char board[][];
 	public Point current;
+	public int row, col;
 	
 	public void setDM(Map m, Point current) { 
 		//실제지도 정보를 받아서 dynamic map에 그대로 그림으로써 초기화
 		this.m = m; this.current = current;
+		this.row = m.row; this.col = m.col;
 		board = new char[m.row][m.col];
 		for (int i = 0; i < m.row; i++) {
 			for (int j = 0; j< m.col; j++) {

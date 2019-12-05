@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import basic.Point;
 import mappackage.Map;
 import spotpackage.Predefined;
+import spotpackage.Spot;
 
 public class Path implements CheckMotion{
 	public ArrayList<Point> pathlist = new ArrayList();
@@ -17,7 +18,8 @@ public class Path implements CheckMotion{
 		while(!queue.isEmpty()) {
 			Boolean end_flag = true;
 			
-			for (Predefined obj:m.plist) {
+			for (Spot s:m.plist) {
+				Predefined obj = (Predefined) s;
 				if (!obj.getVisited()) {
 					end_flag = false;
 				}	
@@ -30,7 +32,8 @@ public class Path implements CheckMotion{
 			int now_y = p.gety();
 			m.visited[now_x][now_y] = true;
 			
-			for (Predefined obj:m.plist) {
+			for (Spot s:m.plist) {
+				Predefined obj = (Predefined) s;
 				if (!obj.getVisited()) {
 					if (now_x == obj.getPosition().getx() && now_y == obj.getPosition().gety()) {
 						int listSize = pathlist.size();

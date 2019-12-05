@@ -34,7 +34,7 @@ public class OperateExploration {
 	        d = sc.nextInt();
 	        if(d==-1) break;
 	        if(d >= b) System.out.println("index out of bound");
-	        repo.m.setHazard(c, d);
+	        repo.m.setHazard(new Point(c, d));
         }while(true);
         
         System.out.println("\nEnter -1 to quit");
@@ -46,7 +46,7 @@ public class OperateExploration {
 	        d = sc.nextInt();
 	        if(d==-1) break;
 	        if(d >= b) System.out.println("index out of bound");
-	        repo.m.setPredefined(c, d);
+	        repo.m.setPredefined(new Point(c, d));
         }while(true);
         
 	}

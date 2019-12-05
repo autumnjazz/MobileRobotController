@@ -25,7 +25,10 @@ public class Robot implements SIM{
 	public void setCurrent(int x, int y) {
 		current.setPoint(x, y);
 	}
-	
+
+	public void setCurrent(Point p) {
+		current = p;
+	}
 	public void detectSpot() {
 		//detect and update hazard
 		Point loc = hs.location(repo); //바로 다음 path 의 위험

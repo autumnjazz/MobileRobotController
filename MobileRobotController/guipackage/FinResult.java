@@ -5,6 +5,8 @@ package guipackage;
  * and open the template in the editor.
  */
 
+import mappackage.Map;
+
 /**
  *
  * @author Darae
@@ -14,8 +16,8 @@ public class FinResult extends javax.swing.JPanel {
     /**
      * Creates new form FinResult
      */
-    public FinResult(int r, int c) {
-        mapBoard2 = new guipackage.component.MapBoard(r,c);
+    public FinResult(Map m) {
+        mapBoard2 = new guipackage.component.MapBoard(m.row,m.col);
         initComponents();
     }
 

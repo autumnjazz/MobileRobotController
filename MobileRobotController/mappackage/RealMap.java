@@ -39,14 +39,18 @@ public class RealMap {
 	
 	void addHazard() {
 		Point hp = randomPoint();
-		if(!m.checkcontains(hp)) {
+		char spot = m.board[hp.getx()][hp.gety()].getCharacter();
+		if(spot == '.') {
+			Hazard h = new Hazard(hp);
 			board[hp.getx()][hp.gety()] = 'H';	
 		}
 	}
 	void addColorblob() {
 		Point cp = randomPoint();
-		if(!m.checkcontains(cp)) {
-		board[cp.getx()][cp.gety()] = 'C';
+		char spot = m.board[cp.getx()][cp.gety()].getCharacter();
+		if(spot == '.') {
+			ColorBlob c = new ColorBlob(cp);
+			board[cp.getx()][cp.gety()] = 'C';	
 		}
 	}
 	

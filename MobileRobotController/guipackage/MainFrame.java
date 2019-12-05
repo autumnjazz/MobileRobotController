@@ -1,14 +1,25 @@
 package guipackage;
 
 import java.awt.CardLayout;
+
+import basic.Point;
 import guipackage.alert.*;
 import guipackage.component.*;
 import guipackage.exploring.*;
 import guipackage.settings.*;
+import mappackage.DynamicMap;
+import mappackage.Map;
+import mappackage.RealMap;
+import repositorypackage.Repository;
+import robotpackage.Robot;
 
 
 public class MainFrame extends javax.swing.JFrame {
-    public boolean chkenter;
+	// from outside
+	public Repository repo = new Repository();
+	RealMap rm;
+	public Robot robot = new Robot(repo);
+	
 	public int col; public int row;
 	
     FinAlert finalert;
@@ -23,6 +34,7 @@ public class MainFrame extends javax.swing.JFrame {
     
     public MainFrame() {
         initComponents();
+        showFrame();
     }
     
     void sizeInput(){
@@ -46,10 +58,10 @@ public class MainFrame extends javax.swing.JFrame {
         layout.show(btnPanel,"btn");
     }
 
-    public void createCard(int r, int c){
-        settingCard = new SettingsCard(r, c);
-        exploringCard = new ExploringCard(r, c);
-        result = new FinResult(r, c);
+    public void createCard(Map m){
+        settingCard = new SettingsCard(m);
+        exploringCard = new ExploringCard(m);
+        result = new FinResult(m);
         contentPanel.setLayout(layout);
         contentPanel.add(settingCard,"set");
         contentPanel.add(exploringCard,"exp");
@@ -65,7 +77,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Mobiel Robot Monitor");
-        setLocationRelativeTo(null);  
+        setLocation(300,100);  
 
         btnPanel.setPreferredSize(new java.awt.Dimension(1000, 100));
 
@@ -121,7 +133,8 @@ public class MainFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 sizeInput();
-                createCard(row,col);
+                repo.m.initBoard(row, col);
+                createCard(repo.m);
                 createBtn();
                 setVisible(true);
             }
@@ -338,14 +351,16 @@ public class MainFrame extends javax.swing.JFrame {
 
         private void enterBtnActionPerformed(java.awt.event.ActionEvent evt) {                                         
             if(enterBtn.getText().equals("Enter")){
-                chkenter = true;
-                System.out.println(chkenter);
                 enterBtn.setText("Start");
                 settingCard.changeCard("pos");
             }
             else if(enterBtn.getText().equals("Start")){
                 layout.show(contentPanel,"exp");
                 btncard.changeCard("chk");
+                Point p = settingCard.posPanel.current;
+                robot.setCurrent(p);
+                repo.setDM(p);
+                repo.p.calculatePath(repo.m, robot.getCurrent());
             }
         }                                        
 

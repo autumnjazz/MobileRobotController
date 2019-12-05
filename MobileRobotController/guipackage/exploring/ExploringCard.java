@@ -7,6 +7,8 @@ package guipackage.exploring;
 
 import java.awt.CardLayout;
 
+import mappackage.Map;
+
 /**
  *
  * @author Darae
@@ -18,9 +20,9 @@ public class ExploringCard extends javax.swing.JPanel {
     /**
      * Creates new form ExploringCard
      */
-    public ExploringCard(int r, int c) {
+    public ExploringCard(Map m) {
         initComponents();
-        showmapPanel = new ShowMap(r,c);
+        showmapPanel = new ShowMap(m);
         hidemapPanel = new HideMap();
         createCard();
     }

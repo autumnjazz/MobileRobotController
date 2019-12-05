@@ -5,6 +5,8 @@
  */
 package guipackage.exploring;
 
+import mappackage.Map;
+
 /**
  *
  * @author Darae
@@ -14,8 +16,8 @@ public class ShowMap extends javax.swing.JPanel {
     /**
      * Creates new form ShowMap
      */
-    public ShowMap(int r, int c) {
-        mapBoard1 = new guipackage.component.MapBoard(r,c);
+    public ShowMap(Map m) {
+        mapBoard1 = new guipackage.component.MapBoard(m.row,m.col);
         initComponents();
     }
 

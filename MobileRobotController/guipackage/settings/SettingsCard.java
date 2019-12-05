@@ -7,6 +7,9 @@ package guipackage.settings;
 
 import java.awt.CardLayout;
 
+import mappackage.DynamicMap;
+import mappackage.Map;
+
 /**
  *
  * @author Darae
@@ -18,10 +21,10 @@ public class SettingsCard extends javax.swing.JPanel {
     /**
      * Creates new form SettingsCard
      */
-    public SettingsCard(int r, int c) {
+    public SettingsCard(Map m) {
         initComponents();
-        blobPanel = new SetBlobs(r,c);
-        posPanel = new SetPos(r,c);
+        blobPanel = new SetBlobs(m);
+        posPanel = new SetPos(m);
         createCard();
     }
     
@@ -32,7 +35,7 @@ public class SettingsCard extends javax.swing.JPanel {
         layout.show(this, "blob");
     }
     
-    public void changeCard(String s){ //1?���? pos
+    public void changeCard(String s){ 
             layout.show(this, s);
     }
 

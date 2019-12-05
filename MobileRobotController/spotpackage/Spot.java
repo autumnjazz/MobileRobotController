@@ -2,10 +2,15 @@ package spotpackage;
 import basic.*;
 
 public class Spot {
-	Point p = new Point();
+	public Point p;
 	protected char character;
-	public Spot(){
+	public Spot(int x, int y){
 		character = '.';
+		p =  new Point(x,y);
+	}
+	public Spot(Point p) {
+		character = '.';
+		this.p =  p;
 	}
 	public void setPosition(int x, int y) {
 		p.setPoint(x, y);
@@ -13,14 +18,12 @@ public class Spot {
 	public Point getPosition() { return p;}
 	public char getCharacter() {return character;}
 	@Override
-	public boolean equals(Object v) {
-        boolean retVal = false;
-        if (v!=null && v instanceof Spot){
-            Spot p = (Spot) v;
-            retVal = 
-         		(p.getPosition() == this.getPosition());
+	public boolean equals(Object obj) {
+        if (obj !=null && obj instanceof Spot){
+            Spot s = (Spot) obj;
+         	return (s.p.equals(this.p));
         }
 
-     return retVal;
+     return false;
 	}
 }

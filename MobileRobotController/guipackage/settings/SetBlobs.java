@@ -13,16 +13,20 @@ import java.util.HashSet;
 
 import basic.Point;
 import guipackage.component.MapBoard;
+import mappackage.Map;
+import spotpackage.Hazard;
+import spotpackage.Predefined;
+import spotpackage.Spot;
 
 /**
  *
  * @author Darae
  */
 public class SetBlobs extends javax.swing.JPanel {
-	public HashSet<Point> hazardset = new HashSet<Point>();
-	public HashSet<Point> predefinedset = new HashSet<Point>();
-    public SetBlobs(int r, int c) {
-        mapBoard1 = new MapBoardForSet(r,c);
+	Map m;
+    public SetBlobs(Map m) {
+    	this.m = m;
+        mapBoard1 = new MapBoardForSet(m.row,m.col);
         initComponents();
         //group btns
         btnGroup.add(hazardBtn);
@@ -35,15 +39,17 @@ public class SetBlobs extends javax.swing.JPanel {
 		int c = (int)(realx/mapBoard1.SIZE); 
     	if(hazardBtn.isSelected() == true) {
     		p = new Point(r,c);
-    		hazardset.add(p);
-    		hazardset.removeAll(predefinedset);
-    		repaint();
+    		m.setHazard(p);
+    		mapBoard1.removeAll();
+    		mapBoard1.revalidate();
+    		mapBoard1.repaint();
     		
     	}else if(predefinedBtn.isSelected() == true) {
     		p = new Point(r,c);
-    		predefinedset.add(p);
-    		predefinedset.removeAll(hazardset);
-    		repaint();
+    		m.setPredefined(p);
+    		mapBoard1.removeAll();
+    		mapBoard1.revalidate();
+    		mapBoard1.repaint();
     	}
     }
     
@@ -217,13 +223,15 @@ public class SetBlobs extends javax.swing.JPanel {
     		super.paint(g);
     		g.setFont(new Font("TimesRoman", Font.PLAIN, 15)); 
     		int centerr,centerc;
-    		for(Point p: hazardset) {
+    		for(Spot h: m.hlist) {
+    			Point p = h.getPosition();
     			centerr = p.getx()*SIZE+ 10;
     			centerc = p.gety()*SIZE+ 20;
     			g.drawString("H", centerc, centerr);
     		}
     		g.setFont(new Font("TimesRoman", Font.PLAIN, 15)); 
-    		for(Point p: predefinedset) {
+    		for(Spot pd: m.plist) {
+    			Point p = pd.getPosition();
     			centerr = p.getx()*SIZE + 10;
     			centerc = p.gety()*SIZE +20;
     			g.drawString("P", centerc, centerr);
