@@ -6,14 +6,20 @@ import mappackage.RealMap;
 import repositorypackage.Repository;
 import robotpackage.Robot;
 
-public class OperateExploration_GUI {
-	MainFrame main;
-	
-	public OperateExploration_GUI() {
-		main = new MainFrame();
-	}
+public class OperateExploration_GUI{
 	public static void main(String[] args) {
-		new OperateExploration_GUI();
-		
-	}
+        Runnable runnable = new RunnableTest();
+        Thread thr = new Thread(runnable);
+        thr.start();
+    }
+}
+
+
+class RunnableTest implements Runnable {
+    MainFrame main = new MainFrame();
+ 
+    public void run() {
+        main.startexplore();
+    }
+
 }

@@ -102,8 +102,6 @@ public class OperateExploration {
 			
 			c = sc.next().charAt(0);
 		}while(c != 'n');
-		
-		
 	}
 	
 	public static void main(String[] args) {

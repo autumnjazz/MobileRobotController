@@ -7,7 +7,7 @@ import robotpackage.Robot;
 
 public class DynamicMap {
 	public Map m;
-	private char board[][];
+	public char board[][];
 	public Point current;
 	public int row, col;
 	
