@@ -103,11 +103,12 @@ public class OperateExploration {
 			System.out.print("Next Path after detecting: ");
 			System.out.println(robot.readpath());
 			repo.p.printPath();
-
+			System.out.println("robot's position: "+ robot.getCurrent());
 			robot.move();
 			Boolean checkmotionFlag = repo.p.checkmotion(robot);
-			// 에러가 난 경
+			// 에러가 난 경우
 			if (!checkmotionFlag) {
+				System.out.println("error");
 				// 뒤로 가는 함수가 굳이 필요한가? 그냥 두 칸 이동한 곳에서 경로 재생성하니까 문제 없을 듯 
 				repo.p.clearPath();
 			}

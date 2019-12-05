@@ -29,12 +29,15 @@ public class Path {
 			Point p =  queue.poll();
 			int now_x = p.getx();
 			int now_y = p.gety();
-			m.visited[now_x][now_y] = true;
+			m.setVisited(now_x, now_y, true);
+			
 			
 			for (Predefined obj:m.plist) {
 				if (!obj.getVisited()) {
 					if (now_x == obj.getPosition().getx() && now_y == obj.getPosition().gety()) {
 						int listSize = pathlist.size();
+						System.out.println("listSize: "+listSize);
+						
 						while (true) {
 
 							pathlist.add(listSize,p);
@@ -52,6 +55,8 @@ public class Path {
 						m.clearVisited();
 						queue.clear();
 						queue.add(new Point(now_x,now_y));
+						System.out.println("queue에 넣어주는 값:"+now_x+","+now_y);
+						System.out.println(queue.size());
 						obj.setVisited(true);
 						break;
 					}	

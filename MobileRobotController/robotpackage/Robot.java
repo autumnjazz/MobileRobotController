@@ -26,6 +26,10 @@ public class Robot implements SIM{
 		current.setPoint(x, y);
 	}
 	
+	public void setCurrent(Point next) {
+		setCurrent(next.getx(), next.gety());
+	}
+	
 	public void detectSpot() {
 		//detect and update hazard
 		Point loc = hs.location(repo); //�ٷ� ���� path �� ����
@@ -63,14 +67,14 @@ public class Robot implements SIM{
 		
 		if(next != null) {
 			repo.dm.updateRobot(current, next);
+			setCurrent(next);
+			currentidx +=1;
 		}
-		current = next;
-		currentidx +=1;
 	}
 	
 	public Point move_error(Point next) {
 		System.out.println("move_error");
-		// 별다른 변화가 없으면 next 를 그대로 반
+		// 별다른 변화가 없으면 next 를 그대로 반환
 		Point newNext = next;
 		Point current = next.getPrev_p();
 		if (next.getx()==current.getx()) {
@@ -78,6 +82,7 @@ public class Robot implements SIM{
 			if (next.gety()-current.gety() == 1) {
 				// 아래 쪽으로 한 칸 더 가도 칸을 벗어나지 않는다면
 				if (point_val(next.getx(),next.gety()+1)) {
+					System.out.println("아래");
 					newNext.setPoint(next.getx(),next.gety()+1,current);
 				}
 			}
@@ -85,6 +90,7 @@ public class Robot implements SIM{
 			else if (next.gety()-current.gety() == -1) {
 				// 위쪽으로 한 칸 더 가도 칸을 벗어나지 않는다면
 				if (point_val(next.getx(),next.gety()-1)) {
+					System.out.println("위");
 					newNext.setPoint(next.getx(),next.gety()-1,current);
 				}
 			}
@@ -94,14 +100,15 @@ public class Robot implements SIM{
 			if (next.getx()-current.getx() == 1) {
 				// 아래 쪽으로 한 칸 더 가도 칸을 벗어나지 않는다면
 				if (point_val(next.getx()+1,next.gety())) {
+					System.out.println("오른");
 					newNext.setPoint(next.getx()+1,next.gety(),current);
 				}
 			}
 			// 왼
-			// 오른
 			if (next.getx()-current.getx() == -1) {
 				// 아래 쪽으로 한 칸 더 가도 칸을 벗어나지 않는다면
 				if (point_val(next.getx()-1,next.gety())) {
+					System.out.println("왼");
 					newNext.setPoint(next.getx()-1,next.gety(),current);
 				}
 			}

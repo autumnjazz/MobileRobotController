@@ -147,5 +147,13 @@ public class Map {
 		return true;
 	}
 	
+	public void setVisited(int x, int y, Boolean bool) {
+		visited[x][y] = bool;
+	}
+	
+	public Boolean getVisited(int x, int y) {
+		return visited[x][y];
+	}
+	
 	
 }
