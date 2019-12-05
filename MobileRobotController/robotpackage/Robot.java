@@ -61,7 +61,7 @@ public class Robot implements SIM{
 		Point next = readpath();
 		
 		int randomNum = (int)(Math.random()*100)+1;
-		if (randomNum < 10) {
+		if (randomNum < 0) {
 			next = move_error(next);
 		}
 		
