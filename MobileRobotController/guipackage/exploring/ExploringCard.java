@@ -7,6 +7,7 @@ package guipackage.exploring;
 
 import java.awt.CardLayout;
 
+import guipackage.component.Notification;
 import mappackage.DynamicMap;
 import mappackage.Map;
 import mappackage.RealMap;
@@ -22,12 +23,16 @@ public class ExploringCard extends javax.swing.JPanel {
     HideMap hidemapPanel;
     public ShowMap showmapPanel;
     
-    
     public ExploringCard() {
         initComponents();
         showmapPanel = new ShowMap();
         hidemapPanel = new HideMap();
         createCard();
+    }
+    
+    public void setNoti(String message) {
+    	showmapPanel.setNoti(message);
+    	hidemapPanel.setNoti(message);
     }
     
     private void createCard(){

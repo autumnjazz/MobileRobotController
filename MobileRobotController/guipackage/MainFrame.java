@@ -89,8 +89,9 @@ public class MainFrame extends javax.swing.JFrame {
     	}
 		do {
 	    	exploringCard.showmapPanel.setDM(repo.dm);
+	    	exploringCard.setNoti(robot.message);
 	    	try {
-				Thread.sleep(1000);
+				Thread.sleep(500);
 	
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -99,16 +100,20 @@ public class MainFrame extends javax.swing.JFrame {
 				break;
 			}
 			robot.detectSpot();
+			try {
+				Thread.sleep(500);
+	
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			repo.p.calculatePath(repo.m, robot.getCurrent());
 			robot.move();
 			repo.p.checkmotion();
 		}while(true);
-		System.out.println("finished while");
 		finishalert();
     }
     
     public synchronized void finishalert() {
-    	System.out.println("started alert()");
 		finalert= new FinAlert(new javax.swing.JFrame(), true);
 		finalert.setLocationRelativeTo(null);  
 		finalert.setVisible(true);

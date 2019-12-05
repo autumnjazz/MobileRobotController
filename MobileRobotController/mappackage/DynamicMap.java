@@ -34,7 +34,8 @@ public class DynamicMap {
 	public void updateVisited(Point p) {
 		int x = p.getx();
 		int y = p.gety();
-		board[x][y] = '-';
+		if(board[x][y] != 'C')
+			board[x][y] = '-';
 	}
 	public void updateRobot(Point pre, Point p) {
 		updateVisited(pre);

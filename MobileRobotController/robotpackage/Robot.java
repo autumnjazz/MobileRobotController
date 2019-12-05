@@ -8,6 +8,7 @@ import sensorpackage.*;
 public class Robot implements SIM{
 	Point current = new Point();
 	int currentidx = 0;
+	public String message = "";
 	public ColorBlobSensor cs = new ColorBlobSensor();
 	public HazardSensor hs = new HazardSensor();
 	public PositionSensor ps = new PositionSensor();
@@ -34,7 +35,7 @@ public class Robot implements SIM{
 		Point loc = hs.location(repo); //바로 다음 path 의 위험
 		boolean hresult = hs.checksensor(loc);
 		if(hresult) {
-			System.out.println("H: "+loc);
+			message = message+ "H: "+loc + "\n";
 			repo.dm.updateHazard(loc);
 			repo.m.setHazard(loc);
 		}
@@ -43,7 +44,7 @@ public class Robot implements SIM{
 		for(int i = 0; i<4; i++) { //상하좌우
 			if(cresult[i]) {
 				Point loc2 = cs.location(repo, i);
-				System.out.println("C: "+loc2);
+				message = message+ "C: "+loc2 + "\n";
 				repo.dm.updateColorblob(loc2);
 				repo.m.setColorblob(loc2);
 			}
@@ -58,6 +59,7 @@ public class Robot implements SIM{
 		Point next = readpath();
 		if(next != null) {
 			repo.dm.updateRobot(current, next);
+			message = message+ "move from "+ current + " to " + next +"\n";
 		}
 		current = next;
 		currentidx +=1;

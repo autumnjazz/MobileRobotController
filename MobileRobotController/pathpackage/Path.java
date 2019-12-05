@@ -8,7 +8,7 @@ import mappackage.Map;
 import spotpackage.Predefined;
 import spotpackage.Spot;
 
-public class Path implements CheckMotion{
+public class Path{
 	public ArrayList<Point> pathlist = new ArrayList();
 	
 	public void calculatePath(Map m, Point robot_p) {	

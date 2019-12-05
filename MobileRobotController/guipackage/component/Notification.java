@@ -18,6 +18,11 @@ public class Notification extends javax.swing.JPanel {
         initComponents();
     }
 
+    public void setM(String s) {
+    	notiContent.selectAll();
+    	notiContent.replaceSelection("");
+    	notiContent.append(s);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -28,6 +28,9 @@ public class ShowMap extends javax.swing.JPanel {
         mapBoard1 = new MapBoardForShow(dm.row,dm.col);
         setMapBoard();
     }
+    public void setNoti(String s) {
+    	notification2.setM(s);
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
